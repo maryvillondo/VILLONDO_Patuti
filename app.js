@@ -45,12 +45,11 @@ class Player {
         this.x = canvas.width/2;
         this.y = canvas.height / 2;
         this.radius = 50;
-        this.angle = 0;
-        this.frameX = 0;
+        this.frameX = 4;
         this.frameY = 0;
         this.frame = 0;
-        this.spriteWidth = 498;
-        this.spriteHeight = 327;
+        this.spriteWidth = 323;
+        this.spriteHeight = 323;
     }
 
     update(){
@@ -87,11 +86,10 @@ class Player {
 
         context.save();
         context.translate(this.x, this.y);
-        context.rotate(this.angle);
         if(this.x >= mouse.x){
-            context.drawImage(playerLeft, this.frameX * this.spriteWidth - 200, this.frameY * this.spriteHeight, this.spriteWidth, this.spriteHeight, 0 - 115, 0 - 60, this.spriteWidth/3, this.spriteHeight/3);
+            context.drawImage(playerLeft, this.frameX * this.spriteWidth, this.frameY * this.spriteHeight, this.spriteWidth, this.spriteHeight, 0 - 53, 0 - 60, this.spriteWidth/3, this.spriteHeight/3);
         }else{
-            context.drawImage(playerRight, this.frameX * this.spriteWidth - 200, this.frameY * this.spriteHeight, this.spriteWidth, this.spriteHeight, 0 - 115, 0 - 60, this.spriteWidth/3, this.spriteHeight/3);
+            context.drawImage(playerRight, this.frameX * this.spriteWidth, this.frameY * this.spriteHeight, this.spriteWidth, this.spriteHeight, 0 - 53, 0 - 60, this.spriteWidth/3, this.spriteHeight/3);
         }
         context.restore();
     }
@@ -184,10 +182,10 @@ class BulletVertical{
     }
 }
 
-const bulletsPop1 = document.createElement('audio');
-bulletsPop1.src = './assets/audio/vgmenuhighlight.ogg';
-const bulletsPop2 = document.createElement('audio');
-bulletsPop2.src = './assets/audio/vgmenuselect.ogg';
+const audio_Bullets1 = document.createElement('audio');
+audio_Bullets1.src = './assets/audio/vgmenuhighlight.ogg';
+const audio_Bullets2 = document.createElement('audio');
+audio_Bullets2.src = './assets/audio/vgmenuselect.ogg';
 
 function handleBulletsVertical(){
     if(!gameOver){
@@ -206,9 +204,9 @@ function handleBulletsVertical(){
                 
                 if(!bulletsVerticalArray[i].counted && health > 20){
                     if(bulletsVerticalArray[i].sound == 'sound1'){
-                        bulletsPop1.play();
+                        audio_Bullets1.play();
                     }else{
-                        bulletsPop2.play();
+                        audio_Bullets2.play();
                     }
                     
                     bulletsVerticalArray[i].counted = true;    
@@ -217,9 +215,9 @@ function handleBulletsVertical(){
                     health-=20;
                 }else if(!bulletsVerticalArray[i].counted && health == 20){
                     if(bulletsVerticalArray[i].sound == 'sound1'){
-                        bulletsPop1.play();
+                        audio_Bullets1.play();
                     }else{
-                        bulletsPop2.play();
+                        audio_Bullets2.play();
                     }
                     i--; 
                     health = health-20;
@@ -248,9 +246,9 @@ function handleBulletsHorizontal(){
                 //(console.log('collision'));
                 if(!bulletsHorizontalArray[i].counted && health > 20){
                     if(bulletsHorizontalArray[i].sound == 'sound1'){
-                        bulletsPop1.play();
+                        audio_Bullets1.play();
                     }else{
-                        bulletsPop2.play();
+                        audio_Bullets2.play();
                     }
                     
                     bulletsHorizontalArray[i].counted = true;    
@@ -259,9 +257,9 @@ function handleBulletsHorizontal(){
                     health-=20;
                 }else if(!bulletsVerticalArray[i].counted && health == 20){
                     if(bulletsVerticalArray[i].sound == 'sound1'){
-                        bulletsPop1.play();
+                        audio_Bullets1.play();
                     }else{
-                        bulletsPop2.play();
+                        audio_Bullets2.play();
                     }
                     i--; 
                     health = health-20;
@@ -292,11 +290,16 @@ function handleBackground(){
     context.drawImage(background, xOffset, yOffset + 350, newWidth, newHeight/3);
 }
 
+const audio_gameOver = document.createElement('audio');
+audio_gameOver.src = './assets/audio/gameover.ogg';
+
 //Game-over
 function handleGameOver() {
     context.fillStyle = 'red';
     context.fillText('GAME OVER', (canvas.width/2) - 100 , (canvas.height/2) - 50);
     gameOver = true;
+    audio_gameOver.play();
+
 }
 
 
