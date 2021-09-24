@@ -70,25 +70,11 @@ class Player {
          // Spaghetti code refactored using the modulus operator
         if(gameFrame % 10 === 0) {
             this.frame++;
-            if(this.frame >= 4) this.frame = 0;
+            if(this.frame >= 5) this.frame = 0;
             this.frameX++;
-            if(this.frame > 10) {
-                this.frameY = 0;
-            }
-        }
-
-        if(gameFrame % 4 === 0) {
-            this.frame++;
-            if(this.frame >= 4) this.frame = 0;
-            // set FrameX to 0 and incrememnt frameY by 1 when current frame 
-            // has a remainder of 3, which is at frame 3, 7, 1
-            // if frame has a remainder of 3 and it's greater than 10 set frameY to 0
-            if(this.frameX % 4 != 0){
-                this.frameX++;
-            }else{
+            if(this.frameX > 4) {
                 this.frameX = 0;
             }
-            // Verify frameY: frameY = 0 frame 0 - 2, frameY = 1 frame 3 - 6, frameY = 2 frame 7 - 10, frameY = 0 at frame 11
             console.log('current frame ' + this.frame + ' frameY: ' + this.frameY);
           }
     }
